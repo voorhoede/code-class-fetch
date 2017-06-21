@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code class Fetch</title>
+  </head>
+  <body>
+    <a href="./">Code class <code>Fetch</code></a>
+    <h1>Exercise 4: Handle <code>fetch</code> errors</h1>
+    <p>Handle errors using <code>.catch</code> so dead endpoint outputs "Failed to fetch", fake endpoint outputs "Not Found" and protected endpoint outputs "Unauthorized".</p>
+    <button id="fetchDead">Fetch dead endpoint</button>
+    <button id="fetchFake">Fetch fake endpoint</button>
+    <button id="fetchAuth">Fetch auth protected endpoint</button>
+    <br><br>
+    <output style="display:block;">(output)</output>
+
+    <script>
+      document.getElementById('fetchDead').addEventListener('click', function() { fetchAndOutput('http://localhost:10101/') });
+      document.getElementById('fetchFake').addEventListener('click', function() { fetchAndOutput('/fake/') });
+      document.getElementById('fetchAuth').addEventListener('click', function() { fetchAndOutput('/protected/') });
+      function output(value) { document.querySelector('output').value = JSON.stringify(value); }
+      function outputSuccess(value) { output(value); document.querySelector('output').style.background = 'GreenYellow'; }
+      function outputFailure(error) { output(error.message); document.querySelector('output').style.background = 'LightCoral'; }
+
+      function fetchAndOutput(endpoint) {
+        fetch(endpoint)
+        .then(function(response) {
+          // @todo reject "unsuccessful requests" with error using `statusText` 
+          return response.text();
+        })
+        .then(outputSuccess)
+        //.catch(outputFailure);
+      }
+    </script>
+  </body>
+</html>

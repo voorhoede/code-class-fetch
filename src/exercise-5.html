@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code class Fetch</title>
+  </head>
+  <body>
+    <a href="./">Code class <code>Fetch</code></a>
+    <h1>Exercise 5: Use credentials</h1>
+    <p>Include cookies in fetch request to authenticate.</p>
+    <button id="fetchAuth">Fetch auth protected endpoint</button>
+    <br><br>
+    <output style="display:block;">(output)</output>
+
+    <script>
+      document.getElementById('fetchAuth').addEventListener('click', fetchAndOutput);
+      function output(value) { document.querySelector('output').value = JSON.stringify(value); }
+      function outputSuccess(value) { output(value); document.querySelector('output').style.background = 'GreenYellow'; }
+      function outputFailure(error) { output(error.message); document.querySelector('output').style.background = 'LightCoral'; }
+
+      function handleResponse(response) {
+        if (response.status >= 200 && response.status < 300) {   
+          return response.json();
+        }
+        return Promise.reject(new Error(response.statusText));
+      }
+
+      function fetchAndOutput() {
+        // @todo Include cookies in fetch request to authenticate.
+        fetch('/protected/', { /* @todo: configure */ })
+          .then(handleResponse)
+          .then(outputSuccess)
+          .catch(outputFailure);
+      }
+    </script>
+  </body>
+</html>

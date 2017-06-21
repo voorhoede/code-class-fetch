@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code class Fetch</title>
+  </head>
+  <body>
+    <a href="./">Code class <code>Fetch</code></a>
+    <h1>Exercise 1: Output response metadata</h1>
+    <p>Inspect the `Response` object and change the script to output its status code and content type.</p>
+    <button>Fetch</button><br><br>
+    <output>(output)</output>
+
+    <script>
+      document.querySelector('button').addEventListener('click', fetchAndOutput);
+      function output(value) { document.querySelector('output').value = value; }
+
+      function fetchAndOutput() {
+        fetch('/ok/')
+        .then(function(response) {
+          output('@todo: output status code and content type');
+        });
+      }
+    </script>
+  </body>
+</html>

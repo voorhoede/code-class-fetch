@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code class Fetch</title>
+  </head>
+  <body>
+    <a href="./">Code class <code>Fetch</code></a>
+    <h1>Exercise 2: Output response body</h1>
+    <p>Convert body to text or json depending on content type and output it.</p>
+    <button id="fetchText">Fetch text</button> <button id="fetchJson">Fetch json</button><br><br>
+    <output>(output)</output>
+
+    <script>
+      document.getElementById('fetchText').addEventListener('click', function() { fetchAndOutput('/text/') });
+      document.getElementById('fetchJson').addEventListener('click', function() { fetchAndOutput('/json/') });
+      function output(value) { document.querySelector('output').value = JSON.stringify(value); }
+
+      function fetchAndOutput(endpoint) {
+        fetch(endpoint)
+        .then(function(response) {
+          var type = response.headers.get('Content-Type');
+          // todo: Convert body to text or json depending on content type
+          return type;
+        })
+        .then(output);
+      }
+    </script>
+  </body>
+</html>

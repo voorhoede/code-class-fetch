@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code class Fetch</title>
+  </head>
+  <body>
+    <a href="./">Code class <code>Fetch</code></a>
+    <h1>Exercise 3: Post with <code>fetch</code></h1>
+    <p>Change script to post form input values to server using fetch.</p>
+    <form>
+      <h2>Store content</h2>
+      <label>Value A <input name="inputA"></label>
+      <label>Value B <input name="inputB"></label>
+      <button>Post content</button>
+    </form><br>
+    <button id="fetchContent">Fetch content</button><br><br>
+    <output>(output)</output>
+
+    <script>
+      document.querySelector('form').addEventListener('submit', function(event) { event.preventDefault(); postForm(event.target) });
+      document.getElementById('fetchContent').addEventListener('click', fetchAndOutput);
+      function output(value) { document.querySelector('output').value = JSON.stringify(value); }
+
+      function postForm(form) {
+        var content = {
+          a: form.inputA.value,
+          b: form.inputB.value
+        };
+        // @todo: use fetch to post content
+        fetch('/store/', { /* @todo: configure */ })
+        .then(function(response) { return response.json(); })
+        .then(output);
+      }
+
+      function fetchAndOutput() {
+        fetch('/store/')
+        .then(function(response) {
+          return response.json();
+        })
+        .then(output);
+      }
+    </script>
+  </body>
+</html>
